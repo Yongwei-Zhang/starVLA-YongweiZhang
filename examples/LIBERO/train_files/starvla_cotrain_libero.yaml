@@ -62,6 +62,8 @@ datasets:
 
   vla_data:
     dataset_py: lerobot_datasets
+    # Use LEROBOT_LIBERO_DATA when data are flat: .../libero_10_..., .../libero_goal_...
+    # Use LEROBOT_LIBERO_DATA/libero when data are under libero/: .../libero/libero_10_...
     data_root_dir: playground/Datasets/LEROBOT_LIBERO_DATA
     data_mix: libero_all # libero_goal
     action_type: delta_qpos

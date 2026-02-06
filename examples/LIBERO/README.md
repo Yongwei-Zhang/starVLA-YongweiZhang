@@ -109,6 +109,14 @@ export DEST=/path/to/your/data/directory
 bash examples/LIBERO/data_preparation.sh
 ```
 
+**If you see `ln: failed to create symbolic link '.../LEROBOT_LIBERO_DATA' or '.../LEROBOT_LIBERO_DATA/libero': File exists`:**
+
+- **Cause:** The path where the script tries to create the symlink already exists as a **real directory** (e.g. you created `LEROBOT_LIBERO_DATA` manually or downloaded data there). `ln` does not overwrite existing files or directories.
+- **Expected layouts:** The dataloader expects either:
+  - **Layout A:** `LEROBOT_LIBERO_DATA/libero_10_no_noops_1.0.0_lerobot`, `libero_goal_...`, etc. (flat under `LEROBOT_LIBERO_DATA`), with `data_root_dir: playground/Datasets/LEROBOT_LIBERO_DATA`, or
+  - **Layout B:** `LEROBOT_LIBERO_DATA/libero/libero_10_...`, `libero/libero_goal_...`, etc., with `data_root_dir: playground/Datasets/LEROBOT_LIBERO_DATA/libero`.
+- **What to do:** (1) Re-run the script: it now skips creating the symlink when the path already exists and still copies `modality.json` into each subset’s `meta/`. (2) If your data is under `LEROBOT_LIBERO_DATA/libero/`, set `data_root_dir` in `train_files/starvla_cotrain_libero.yaml` to `playground/Datasets/LEROBOT_LIBERO_DATA/libero`.
+
 
 ## 🚀 Step1: Start Training
 
